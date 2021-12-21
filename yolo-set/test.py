@@ -4,29 +4,24 @@ import os
 import os.path as osp
 import time
 import warnings
-
 import mmcv
 import torch
 from mmcv import Config, DictAction
 from mmcv.cnn import fuse_conv_bn
 from mmcv.parallel import MMDataParallel, MMDistributedDataParallel
-from mmcv.runner import (get_dist_info, init_dist, load_checkpoint,
-                         wrap_fp16_model)
-
+from mmcv.runner import (get_dist_info, init_dist, load_checkpoint, wrap_fp16_model)
 from mmdet.apis import multi_gpu_test, single_gpu_test
-from mmdet.datasets import (build_dataloader, build_dataset,
-                            replace_ImageToTensor)
+from mmdet.datasets import (build_dataloader, build_dataset, replace_ImageToTensor)
 from mmdet.models import build_detector
+os.environ["CUDA_DEVICE_ORDER"] = 'PCI_BUS_ID'
+os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description='MMDet test (and eval) a model')
-    parser.add_argument('config', help='test config file path')
-    parser.add_argument('checkpoint', help='checkpoint file')
-    parser.add_argument(
-        '--work-dir',
-        help='the directory to save the file containing evaluation metrics')
+    parser = argparse.ArgumentParser(description='MMDet test (and eval) a model')
+    parser.add_argument('--config', default='/storage/alan/workspace/mmStorage/faster_rcnn/voc_fs/faster_rcnn_r50_fpn_1x_voc0712.py', help='Config file')
+    parser.add_argument('--checkpoint', default='/storage/alan/workspace/mmStorage/faster_rcnn/voc_fs/latest.pth', help='Checkpoint file')
+    parser.add_argument('--work-dir', default='/storage/alan/workspace/mmStorage/faster_rcnn', help='the directory to save the file containing evaluation metrics')
     parser.add_argument('--out', help='output result file in pickle format')
     parser.add_argument(
         '--fuse-conv-bn',
