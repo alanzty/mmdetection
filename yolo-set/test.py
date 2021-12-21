@@ -19,8 +19,10 @@ os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
 def parse_args():
     parser = argparse.ArgumentParser(description='MMDet test (and eval) a model')
-    parser.add_argument('--config', default='/storage/alan/workspace/mmStorage/faster_rcnn/voc_fs/faster_rcnn_r50_fpn_1x_voc0712.py', help='Config file')
-    parser.add_argument('--checkpoint', default='/storage/alan/workspace/mmStorage/faster_rcnn/voc_fs/latest.pth', help='Checkpoint file')
+    parser.add_argument('--config', default='/home/alan/Desktop/Research/Detection/mmdetection/alan_configs/yolox/yolox_tiny_8x8_300e_coco.py', help='Config file')
+    parser.add_argument('--checkpoint', default='/storage/alan/workspace/mmStorage/yolo/yolox_tiny_8x8_300e_coco_20211124_171234-b4047906.pth', help='Checkpoint file')
+    # parser.add_argument('--config', default='/storage/alan/workspace/mmStorage/faster_rcnn/voc_fs/faster_rcnn_r50_fpn_1x_voc0712.py', help='Config file')
+    # parser.add_argument('--checkpoint', default='/storage/alan/workspace/mmStorage/faster_rcnn/voc_fs/latest.pth', help='Checkpoint file')
     parser.add_argument('--work-dir', default='/storage/alan/workspace/mmStorage/faster_rcnn', help='the directory to save the file containing evaluation metrics')
     parser.add_argument('--out', help='output result file in pickle format')
     parser.add_argument(
