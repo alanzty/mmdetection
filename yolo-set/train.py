@@ -17,11 +17,12 @@ from mmdet.apis import init_random_seed, set_random_seed, train_detector
 from mmdet.datasets import build_dataset
 from mmdet.models import build_detector
 from mmdet.utils import collect_env, get_root_logger
-
+os.environ["CUDA_DEVICE_ORDER"] = 'PCI_BUS_ID'
+os.environ['CUDA_VISIBLE_DEVICES'] = "0, 1"
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
-    parser.add_argument('--config', default='../alan_configs/yolox/yolox_tiny_8x8_300e_coco.py')
+    parser.add_argument('--config', default='../alan_configs/yolox/yolox_tiny_test.py')
     parser.add_argument('--work-dir', default='/storage/alan/workspace/mmStorage/yolo/yolo_tiny_coco')
     parser.add_argument('--resume-from')
     parser.add_argument('--load-from', default='/storage/alan/workspace/mmStorage/yolo/yolox_tiny_8x8_300e_coco_20211124_171234-b4047906.pth')
